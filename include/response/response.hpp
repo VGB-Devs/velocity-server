@@ -3,7 +3,7 @@
 
 class Response {
     public:
-        Response();
+        Response(int socketID);
         std::string data(std::string data);
         std::string status(int status);
         std::string build();
@@ -16,4 +16,5 @@ class Response {
         std::string bytes;
         std::string _contentType;
         std::string fileData;
+        int socketID;
 };

@@ -1,7 +1,9 @@
 compile:
 	g++ \
-	main.cpp \
-	request/request.cpp \
-	response/response.cpp \
-	utils/colours.cpp \
+	Main.cpp \
+	server/Server.cpp \
+	request/Request.cpp \
+	response/Response.cpp \
+	utils/Colours.cpp \
+	utils/FileHandler.cpp \
 	-o web

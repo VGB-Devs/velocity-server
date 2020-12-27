@@ -5,8 +5,8 @@
 #include <map>
 #include <iterator>
 
-#include "../include/request/request.hpp"
-#include "../include/utils/colours.hpp"
+#include "../include/request/Request.hpp"
+#include "../include/utils/Colours.hpp"
 
 Request::Request(std::string request) {
     std::map<std::string, std::string> headers;
@@ -31,9 +31,7 @@ Request::Request(std::string request) {
             tmp += reqL[i];
         }
     }
-
     
-
     headers["method"] = requestline[0];
     headers["route"] = requestline[1];
  

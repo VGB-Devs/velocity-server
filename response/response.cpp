@@ -2,15 +2,19 @@
 #include <fstream>
 #include <string>
 
-#include "../include/response/response.hpp"
+#include <sys/socket.h>
+#include <unistd.h>
 
-Response::Response() {
+#include "../include/response/Response.hpp"
+
+Response::Response(int socketID) {
     this->response = "";
     this->bytes = "";
     this->_data = "";
     this->_status = "200";
     this->_contentType = "text/plain";
     this->fileData = "";
+    this->socketID = socketID;
 }
 
 std::string Response::data(std::string data) {
@@ -52,5 +56,8 @@ std::string Response::build() {
     // TODO log to console;
     
     this->response = "HTTP/1.1 " + this->_status + " OK\nContent-Type: " + this->_contentType + "\nContent-Length:" + this->bytes + "\n\n" + this->_data; 
+    write(this->socketID, this->response.c_str(), this->response.length());
+    close(this->socketID);
+    
     return this->response;
 }
