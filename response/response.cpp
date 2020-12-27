@@ -39,7 +39,7 @@ std::string Response::sendFile(std::string file) {
     target.open(file, std::ios::in);
     std::string tmp = "";
     
-    if(!target) tmp = "cannot find file";
+    if(!target) { tmp = "cannot find file"; this->_status="404"; }
     
     while(std::getline(target, line)) {
         tmp += line + "\n";

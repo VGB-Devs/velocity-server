@@ -4,6 +4,7 @@
 #include <sstream>
 #include <map>
 #include <iterator>
+#include <regex>
 
 #include "../include/request/Request.hpp"
 #include "../include/utils/Colours.hpp"
@@ -34,10 +35,13 @@ Request::Request(std::string request) {
     
     headers["method"] = requestline[0];
     headers["route"] = requestline[1];
- 
+
+    std::string tmpS = headers["route"];
+    tmpS = std::regex_replace(tmpS, std::regex("\\%20"), " ");
+
     this->_method = headers["method"];
-    this->_route = headers["route"];
-    std::cout << boldGreen() << headers["method"] << reset() << " " << headers["route"] << std::endl;
+    this->_route = tmpS;
+    std::cout << boldGreen() << headers["method"] << reset() << " " <<  this->_route << std::endl;
 }
 
 std::string Request::method() { return this->_method;}
