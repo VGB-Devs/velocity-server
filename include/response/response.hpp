@@ -1,6 +1,8 @@
 #include <iostream>
 //std::string response(std::string text, int code);
 
+#pragma once
+
 class Response {
     public:
         Response(int socketID);

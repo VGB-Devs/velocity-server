@@ -1,5 +1,7 @@
 #include <iostream>
 
+#pragma once
+
 class Request {
     public:
         Request(std::string request);

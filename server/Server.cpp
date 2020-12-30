@@ -13,6 +13,7 @@
 #include "../include/server/Server.hpp"
 #include "../include/utils/FileHandler.hpp"
 #include "../include/utils/Colours.hpp"
+#include "../include/events/IncomingEvent.hpp"
 
 Server::Server() {this->_useStatic = false;}
 
@@ -43,6 +44,16 @@ void Server::start(std::function<void (Request, Response)> cb, int argc, char co
         Request request(requestString);
         Response response(new_socket);
         
-        cb(request, response);
+        this->emitIncoming(request.route(), request, response);
     }
+}
+
+void Server::emitIncoming(std::string route, Request req, Response res) {
+    this->IncGetEvent[route].callback(req, res);
+}
+
+void Server::get(std::string route, std::function<void (Request req, Response res)> cb) {
+    IncomingEvent ince;
+    ince.callback = cb;
+    this->IncGetEvent[route] = ince;
 }
